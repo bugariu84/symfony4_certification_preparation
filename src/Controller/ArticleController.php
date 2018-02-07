@@ -9,10 +9,11 @@
 namespace App\Controller;
 
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
@@ -31,6 +32,8 @@ class ArticleController
      */
     public function show($slug)
     {
-        return new Response(sprintf('Future article to show on a space o my god this guy is fo funny and i love the event. PS: %s', $slug));
+        return $this->render('article/show.html.twig', [
+            'title' => ucfirst(str_replace('-', ' ', $slug))
+        ]);
     }
 }
